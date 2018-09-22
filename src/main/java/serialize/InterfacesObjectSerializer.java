@@ -10,7 +10,7 @@ public class InterfacesObjectSerializer implements JsonSerializer<InterfacesObje
     public JsonElement serialize(InterfacesObject interfacesObject, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject result = new JsonObject();
 
-        String[] interfaces = interfacesObject.getAllInterfaces();
+        String[] interfaces = interfacesObject.toStringMatrix();
         result.addProperty("interface_num", interfaces.length);
         JsonArray jsonInterfaces = new JsonArray();
         for (int i = 0; i < interfaces.length; i++) {

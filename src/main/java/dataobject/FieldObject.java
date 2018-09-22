@@ -30,8 +30,8 @@ public class FieldObject extends BytesReaderProxy implements Stuffable {
         }
     }
 
-    public String[][] getAllFields() {
-        String[][] f = new String[fieldCount][3];
+    public String[][] toStringMatrix() {
+        String[][] f = new String[fieldCount][];
         for (int i = 0; i < fields.length; i++) {
             int fieldNameIndex = fields[i].nameIndex.getValue();//constant pool index,it's necessary for code execution engine later
             int fieldDescriptorIndex = fields[i].descriptorIndex.getValue();

@@ -35,20 +35,20 @@ public class B2JClassLoader {
             raw.super_class = read2Bytes();
             u2 interfaceCount = read2Bytes();
 
-            raw.interfaceObj = new InterfacesObject(reader, raw.pool_slots, interfaceCount.getValue());
-            raw.interfaceObj.stuffing();
+            raw.interfaces = new InterfacesObject(reader, raw.pool_slots, interfaceCount.getValue());
+            raw.interfaces.stuffing();
 
             u2 fieldsCount = read2Bytes();
-            raw.fieldObj = new FieldObject(reader, raw.pool_slots, fieldsCount.getValue());
-            raw.fieldObj.stuffing();
+            raw.fields = new FieldObject(reader, raw.pool_slots, fieldsCount.getValue());
+            raw.fields.stuffing();
 
             u2 methodsCount = read2Bytes();
-            raw.methodObj = new MethodObject(reader, raw.pool_slots, methodsCount.getValue());
-            raw.methodObj.stuffing();
+            raw.methods = new MethodObject(reader, raw.pool_slots, methodsCount.getValue());
+            raw.methods.stuffing();
 
             u2 classFileAttributeCount = read2Bytes();
-            raw.attrObj = new ClassFileAttributeObject(reader, raw.pool_slots, classFileAttributeCount.getValue());
-            raw.attrObj.stuffing();
+            raw.attrs = new ClassFileAttributeObject(reader, raw.pool_slots, classFileAttributeCount.getValue());
+            raw.attrs.stuffing();
         } catch (IOException e) {
             e.printStackTrace();
         }

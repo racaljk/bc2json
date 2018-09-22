@@ -20,11 +20,11 @@ public class B2JRawClass {
     @Expose
     u2 super_class;
     @Expose
-    InterfacesObject interfaceObj;
+    InterfacesObject interfaces;
     @Expose
-    FieldObject fieldObj;
+    FieldObject fields;
     @Expose
-    MethodObject methodObj;
+    MethodObject methods;
     @Expose
-    ClassFileAttributeObject attrObj;
+    ClassFileAttributeObject attrs;
 }

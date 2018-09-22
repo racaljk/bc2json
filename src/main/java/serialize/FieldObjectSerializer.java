@@ -9,7 +9,7 @@ public class FieldObjectSerializer implements JsonSerializer<FieldObject> {
     @Override
     public JsonElement serialize(FieldObject f, Type serializeType, JsonSerializationContext jsonSerializationContext) {
         JsonArray jsonFields = new JsonArray();
-        String[][] fields = f.getAllFields();
+        String[][] fields = f.toStringMatrix();
         for (int i = 0; i < fields.length; i++) {
             JsonObject jsonField = new JsonObject();
             jsonField.addProperty("field_name", fields[i][0]);

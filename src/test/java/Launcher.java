@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import dataobject.ConstantPoolObject;
 import dataobject.FieldObject;
 import dataobject.InterfacesObject;
+import dataobject.MethodObject;
 import exception.ClassLoadingException;
 import serialize.*;
 
@@ -22,6 +23,7 @@ public class Launcher {
         builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer());
         builder.registerTypeAdapter(FieldObject.class, new FieldObjectSerializer());
         builder.registerTypeAdapter(InterfacesObject.class, new InterfacesObjectSerializer());
+        builder.registerTypeAdapter(MethodObject.class, new MethodObjectSerializer());
 
         Gson gson = builder.excludeFieldsWithoutExposeAnnotation().create();
 

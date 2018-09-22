@@ -29,7 +29,7 @@ public class InterfacesObject extends BytesReaderProxy implements Stuffable {
         }
     }
 
-    public String[] getAllInterfaces() {
+    public String[] toStringMatrix() {
         String[] inters = new String[interfacesCount];
         for (int i = 0; i < interfacesCount; i++) {
             int index = cp.at(interfaces[i].getValue()).getTableIndex();
