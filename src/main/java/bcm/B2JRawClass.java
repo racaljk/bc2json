@@ -6,6 +6,7 @@ import dataobject.*;
 
 public class B2JRawClass {
     @Expose
+    @SuppressWarnings("unused")
     final String magic = "cafebabe";
     @Expose
     u2 minor_version;

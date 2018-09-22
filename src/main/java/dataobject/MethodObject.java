@@ -59,10 +59,10 @@ public class MethodObject extends BytesReaderProxy implements Stuffable {
         }
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < arr.length - 1; i++) {
-            sb.append(String.valueOf(arr[i].getValue()));
+            sb.append(arr[i].getValue());
             sb.append(",");
         }
-        sb.append(arr[arr.length - 1]);
+        sb.append(arr[arr.length - 1].getValue());
         return sb.toString();
     }
 }
