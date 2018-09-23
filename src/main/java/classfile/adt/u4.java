@@ -1,4 +1,4 @@
-package adt;
+package classfile.adt;
 
 public class u4 {
     private long value;

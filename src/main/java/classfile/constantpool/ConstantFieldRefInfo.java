@@ -1,7 +1,7 @@
 package classfile.constantpool;
 
-import adt.u1;
-import adt.u2;
+import classfile.adt.u1;
+import classfile.adt.u2;
 import classfile.constant.ConstantPoolTags;
 import parser.ClassFileReader;
 

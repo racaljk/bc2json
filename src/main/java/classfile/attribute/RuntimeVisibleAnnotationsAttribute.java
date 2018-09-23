@@ -1,6 +1,6 @@
 package classfile.attribute;
 
-import adt.u2;
+import classfile.adt.u2;
 import classfile.exception.ClassLoadingException;
 import parser.ClassFileReader;
 

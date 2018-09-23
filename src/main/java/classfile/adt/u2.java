@@ -1,4 +1,4 @@
-package adt;
+package classfile.adt;
 
 import com.google.gson.annotations.Expose;
 

@@ -3,53 +3,80 @@ package serialize;
 import classfile.constantpool.*;
 import com.google.gson.*;
 import dataobject.ConstantPoolObject;
+import util.Numeric;
+import util.Readability;
 
 import java.lang.reflect.Type;
 
 public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPoolObject> {
+    private boolean moreReadable;
+
+    public ConstantPoolObjectSerializer(boolean moreReadable) {
+        this.moreReadable = moreReadable;
+    }
+
     @Override
     public JsonElement serialize(ConstantPoolObject cp, Type serializeType, JsonSerializationContext jsonSerializationContext) {
         JsonObject pool = new JsonObject();
-        pool.addProperty("slotsNum", String.valueOf(cp.getSlotsNum().getValue()));
+
+        // It's not necessary
+        if (!moreReadable) {
+            pool.addProperty("slotsNum", String.valueOf(cp.getSlotsNum().getValue()));
+        }
+
         JsonArray jsonSlots = new JsonArray();
         for (AbstractConstantPool x : cp.getSlots()) {
             JsonObject jsonSlot = new JsonObject();
             jsonSlot.addProperty("index", x.getTableIndex());
             jsonSlot.addProperty("type", x.getClass().getTypeName());
 
-            String type = "";
             if (x instanceof ConstantClassInfo) {
                 String qualifiedClassName = cp.at(((ConstantClassInfo) x).nameIndex.getValue()).toString();
-                jsonSlot.addProperty("class_name", qualifiedClassName);
+                jsonSlot.addProperty("class_name",
+                        moreReadable ? qualifiedClassName.replaceAll("/", ".") : qualifiedClassName);
             } else if (x instanceof ConstantFieldRefInfo) {
                 int classIndex = ((ConstantFieldRefInfo) x).classIndex.getValue();
                 String qualifiedClassName = cp.at(((ConstantClassInfo) cp.at(classIndex)).nameIndex.getValue()).toString();
 
                 int nameAndTypeIndex = ((ConstantFieldRefInfo) x).nameAndTypeIndex.getValue();
                 String name = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).nameIndex.getValue()).toString();
-                type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
+                String type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
 
-                jsonSlot.addProperty("field_class", qualifiedClassName);
-                jsonSlot.addProperty("field_name", name);
-                jsonSlot.addProperty("field_type", type);
+                if (moreReadable) {
+                    String field = Readability.peelFieldDescriptor(type) + " " +
+                            qualifiedClassName.replaceAll("/", ".") + "::" +
+                            name;
+                    jsonSlot.addProperty("field", field);
+                } else {
+                    jsonSlot.addProperty("field_class", qualifiedClassName);
+                    jsonSlot.addProperty("field_name", name);
+                    jsonSlot.addProperty("field_type", type);
+                }
+
             } else if (x instanceof ConstantMethodRefInfo) {
                 int classIndex = ((ConstantMethodRefInfo) x).classIndex.getValue();
                 String qualifiedClassName = cp.at(((ConstantClassInfo) cp.at(classIndex)).nameIndex.getValue()).toString();
 
                 int nameAndTypeIndex = ((ConstantMethodRefInfo) x).nameAndTypeIndex.getValue();
                 String name = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).nameIndex.getValue()).toString();
-                type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
+                String type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
 
-                jsonSlot.addProperty("method_class", qualifiedClassName);
-                jsonSlot.addProperty("method_name", name);
-                jsonSlot.addProperty("method_type", type);
+                if (moreReadable) {
+                    String method = Readability.peelMethodDescriptor(name, type);
+                    jsonSlot.addProperty("method_class", qualifiedClassName.replaceAll("/", "."));
+                    jsonSlot.addProperty("method", method);
+                } else {
+                    jsonSlot.addProperty("method_class", qualifiedClassName);
+                    jsonSlot.addProperty("method_name", name);
+                    jsonSlot.addProperty("method_type", type);
+                }
             } else if (x instanceof ConstantInterfaceMethodRefInfo) {
                 int classIndex = ((ConstantInterfaceMethodRefInfo) x).classIndex.getValue();
                 String qualifiedClassName = cp.at(((ConstantClassInfo) cp.at(classIndex)).nameIndex.getValue()).toString();
 
                 int nameAndTypeIndex = ((ConstantInterfaceMethodRefInfo) x).nameAndTypeIndex.getValue();
                 String name = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).nameIndex.getValue()).toString();
-                type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
+                String type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
 
                 jsonSlot.addProperty("interface_class", qualifiedClassName);
                 jsonSlot.addProperty("interface_name", name);
@@ -64,14 +91,8 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
                 jsonSlot.addProperty("value", integerV);
             } else if (x instanceof ConstantFloatInfo) {
                 int bits = (int) ((ConstantFloatInfo) x).bytes.getValue();
-                int s = ((bits >> 31) == 0) ? 1 : -1;
-                int e = ((bits >> 23) & 0xff);
-                int m = (e == 0) ?
-                        (bits & 0x7fffff) << 1 :
-                        (bits & 0x7fffff) | 0x800000;
-                float floatV = (float) (s * m * Math.pow(2, e - 150));
 
-                jsonSlot.addProperty("value", floatV);
+                jsonSlot.addProperty("value", Numeric.resolveFloat(bits));
             } else if (x instanceof ConstantLongInfo) {
                 int high = (int) ((ConstantLongInfo) x).highBytes.getValue();
                 int low = (int) ((ConstantLongInfo) x).lowBytes.getValue();
@@ -81,15 +102,8 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
             } else if (x instanceof ConstantDoubleInfo) {
                 int high = (int) ((ConstantDoubleInfo) x).highBytes.getValue();
                 int low = (int) ((ConstantDoubleInfo) x).lowBytes.getValue();
-                long bits = ((long) high << 32) + low;
-                int s = ((bits >> 63) == 0) ? 1 : -1;
-                int e = (int) ((bits >> 52) & 0x7ffL);
-                long m = (e == 0) ?
-                        (bits & 0xfffffffffffffL) << 1 :
-                        (bits & 0xfffffffffffffL) | 0x10000000000000L;
-                double doubleV = s * m * Math.pow(2.0, e - 1075);
 
-                jsonSlot.addProperty("value", doubleV);
+                jsonSlot.addProperty("value", Numeric.resolveDouble(high, low));
             } else if (x instanceof ConstantNameAndTypeInfo) {
                 int nameIndex = ((ConstantNameAndTypeInfo) x).nameIndex.getValue();
                 int descriptorIndex = ((ConstantNameAndTypeInfo) x).descriptorIndex.getValue();
@@ -118,7 +132,7 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
                 int nameIndex = ((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).nameIndex.getValue();
                 int typeIndex = ((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue();
                 String name = cp.at(nameIndex).toString();
-                type = cp.at(typeIndex).toString();
+                String type = cp.at(typeIndex).toString();
 
                 jsonSlot.addProperty("bootstrap_method_index", bootstrapMethodAttributeIndex);
                 jsonSlot.addProperty("name", name);

@@ -1,6 +1,6 @@
 package dataobject;
 
-import adt.u2;
+import classfile.adt.u2;
 import classfile.constantpool.ConstantClassInfo;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;

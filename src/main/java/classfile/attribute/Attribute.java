@@ -1,7 +1,7 @@
 package classfile.attribute;
 
-import adt.u2;
-import adt.u4;
+import classfile.adt.u2;
+import classfile.adt.u4;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;

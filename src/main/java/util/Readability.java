@@ -1,4 +1,4 @@
-package serialize;
+package util;
 
 public class Readability {
     public static String getFieldAccessFlagString(int acc) {

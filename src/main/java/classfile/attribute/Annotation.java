@@ -1,7 +1,7 @@
 package classfile.attribute;
 
-import adt.u1;
-import adt.u2;
+import classfile.adt.u1;
+import classfile.adt.u2;
 import classfile.exception.ClassLoadingException;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;

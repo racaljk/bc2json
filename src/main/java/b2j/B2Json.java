@@ -70,7 +70,7 @@ public class B2Json {
 
     private void registerSerializer() {
         builder.registerTypeAdapter(B2JRawClass.class, new B2JRawClassSerializer(moreReadable));
-        builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer());
+        builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer(moreReadable));
         builder.registerTypeAdapter(FieldObject.class, new FieldObjectSerializer(moreReadable));
         builder.registerTypeAdapter(InterfacesObject.class, new InterfacesObjectSerializer());
         builder.registerTypeAdapter(MethodObject.class, new MethodObjectSerializer(moreReadable));

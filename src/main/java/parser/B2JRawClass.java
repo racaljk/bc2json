@@ -1,6 +1,6 @@
 package parser;
 
-import adt.u2;
+import classfile.adt.u2;
 import dataobject.*;
 
 public class B2JRawClass {

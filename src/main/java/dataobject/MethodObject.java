@@ -1,6 +1,6 @@
 package dataobject;
 
-import adt.u1;
+import classfile.adt.u1;
 import classfile.attribute.CodeAttribute;
 import classfile.exception.ClassLoadingException;
 import classfile.field.FieldInfo;

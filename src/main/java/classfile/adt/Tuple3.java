@@ -1,4 +1,4 @@
-package adt;
+package classfile.adt;
 
 public class Tuple3<_TypeA, _TypeB, _TypeC> {
     private _TypeA a;

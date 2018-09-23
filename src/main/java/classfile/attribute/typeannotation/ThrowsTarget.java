@@ -1,6 +1,6 @@
 package classfile.attribute.typeannotation;
 
-import adt.u2;
+import classfile.adt.u2;
 import parser.ClassFileReader;
 
 import java.io.IOException;
