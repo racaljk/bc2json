@@ -1,0 +1,13 @@
+package b2j;
+
+public enum OptionConst {
+    PRETTY_PRINTING,
+
+    MORE_READABLE,
+
+    IGNORE_CLASS_FILE_ATTRIBUTES,
+    IGNORE_METHODS,
+    IGNORE_FIELDS,
+    IGNORE_INTERFACES,
+    IGNORE_CONSTANT_POOL,
+}

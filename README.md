@@ -4,6 +4,7 @@
 [![codebeat badge](https://codebeat.co/badges/0d65b756-e695-4e21-8ae2-ff9c11450930)](https://codebeat.co/projects/github-com-racaljk-bc2json-master)
 
 **bc2json** could convert `*.class bytecode` to `json` representation so that we can use it as **a human readable and also the world's most popular IR(ok, that's json)** for further use.
+Parsing behaviors are based on jvm8 specification. All elements on specification would be parsed into json.
 
 # Start
 Step 1: You can load bytecode from local file
@@ -127,8 +128,21 @@ You can set these options according to your demands
 }
 ```
 
-# More
-+ Parsing behaviors are based on jvm8 specification. All elements on specification would be parsed into json.
+# Full APIs list
++ `public static B2Json fromFilePath(String path)`
+Create B2Json object for further use. Note that we can not create from constructor since it's private method
+
++ `public B2Json withOption(OptionConst opt)`
+Set some options according to demands
+    + `OptionConst.PRETTY_PRINTING`  More pretty printing, it's especially useful when you works on developing phase
+    + `OptionConst.MORE_READABLE` Make json string more readable. It's also recommend to set it. 
+    + `OptionConst.IGNORE_CLASS_FILE_ATTRIBUTES` Ignore the attributes of class file
+    + `OptionConst.IGNORE_METHODS` Ignore methods     
+    + `OptionConst.IGNORE_FIELDS` Ignore fields
+    + `OptionConst.IGNORE_INTERFACES` Ignore interfaces
+    + `OptionConst.IGNORE_CONSTANT_POOL` Ignore constant pool slots
++ `public String toJsonString()` Output json as string
++ `public void toJsonFile(String fileName)` Persist json on disk by given file name
 
 # License
 Yes, I love the [MIT LICENSE](LICENSE)

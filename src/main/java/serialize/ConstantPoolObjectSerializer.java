@@ -1,5 +1,6 @@
 package serialize;
 
+import b2j.Option;
 import classfile.constantpool.*;
 import com.google.gson.*;
 import dataobject.ConstantPoolObject;
@@ -9,18 +10,19 @@ import util.Readability;
 import java.lang.reflect.Type;
 
 public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPoolObject> {
-    private boolean moreReadable;
+    private Option option;
 
-    public ConstantPoolObjectSerializer(boolean moreReadable) {
-        this.moreReadable = moreReadable;
+    public ConstantPoolObjectSerializer(Option option) {
+        this.option = option;
     }
+
 
     @Override
     public JsonElement serialize(ConstantPoolObject cp, Type serializeType, JsonSerializationContext jsonSerializationContext) {
         JsonObject pool = new JsonObject();
 
         // It's not necessary
-        if (!moreReadable) {
+        if (!option.isMoreReadable()) {
             pool.addProperty("slotsNum", String.valueOf(cp.getSlotsNum().getValue()));
         }
 
@@ -33,7 +35,7 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
             if (x instanceof ConstantClassInfo) {
                 String qualifiedClassName = cp.at(((ConstantClassInfo) x).nameIndex.getValue()).toString();
                 jsonSlot.addProperty("class_name",
-                        moreReadable ? qualifiedClassName.replaceAll("/", ".") : qualifiedClassName);
+                        option.isMoreReadable() ? qualifiedClassName.replaceAll("/", ".") : qualifiedClassName);
             } else if (x instanceof ConstantFieldRefInfo) {
                 int classIndex = ((ConstantFieldRefInfo) x).classIndex.getValue();
                 String qualifiedClassName = cp.at(((ConstantClassInfo) cp.at(classIndex)).nameIndex.getValue()).toString();
@@ -42,7 +44,7 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
                 String name = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).nameIndex.getValue()).toString();
                 String type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
 
-                if (moreReadable) {
+                if (option.isMoreReadable()) {
                     String field = Readability.peelFieldDescriptor(type) + " " +
                             qualifiedClassName.replaceAll("/", ".") + "::" +
                             name;
@@ -61,7 +63,7 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
                 String name = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).nameIndex.getValue()).toString();
                 String type = cp.at(((ConstantNameAndTypeInfo) cp.at(nameAndTypeIndex)).descriptorIndex.getValue()).toString();
 
-                if (moreReadable) {
+                if (option.isMoreReadable()) {
                     String method = Readability.peelMethodDescriptor(name, type);
                     jsonSlot.addProperty("method_class", qualifiedClassName.replaceAll("/", "."));
                     jsonSlot.addProperty("method", method);

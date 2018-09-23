@@ -16,7 +16,7 @@ import java.io.IOException;
 public class B2Json {
     private static GsonBuilder builder = new GsonBuilder();
     private B2JRawClass raw;
-    private boolean moreReadable = false;
+    private Option option = new Option();
 
     private B2Json() {
     }
@@ -34,13 +34,28 @@ public class B2Json {
         return b2Json;
     }
 
-    public B2Json withOption(Option opt) {
+    public B2Json withOption(OptionConst opt) {
         switch (opt) {
             case PRETTY_PRINTING:
                 builder.setPrettyPrinting();
                 break;
             case MORE_READABLE:
-                moreReadable = true;
+                option.setMoreReadable(true);
+                break;
+            case IGNORE_CLASS_FILE_ATTRIBUTES:
+                option.setIgnoreClassFileAttribute(true);
+                break;
+            case IGNORE_FIELDS:
+                option.setIgnoreFields(true);
+                break;
+            case IGNORE_METHODS:
+                option.setIgnoreMethods(true);
+                break;
+            case IGNORE_INTERFACES:
+                option.setIgnoreInterfaces(true);
+                break;
+            case IGNORE_CONSTANT_POOL:
+                option.setIgnoreConstantPool(true);
                 break;
         }
         return this;
@@ -69,11 +84,11 @@ public class B2Json {
     }
 
     private void registerSerializer() {
-        builder.registerTypeAdapter(B2JRawClass.class, new B2JRawClassSerializer(moreReadable));
-        builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer(moreReadable));
-        builder.registerTypeAdapter(FieldObject.class, new FieldObjectSerializer(moreReadable));
+        builder.registerTypeAdapter(B2JRawClass.class, new B2JRawClassSerializer(option));
+        builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer(option));
+        builder.registerTypeAdapter(FieldObject.class, new FieldObjectSerializer(option));
         builder.registerTypeAdapter(InterfacesObject.class, new InterfacesObjectSerializer());
-        builder.registerTypeAdapter(MethodObject.class, new MethodObjectSerializer(moreReadable));
+        builder.registerTypeAdapter(MethodObject.class, new MethodObjectSerializer(option));
         builder.registerTypeAdapter(ClassFileAttributeObject.class, new ClassFileAttributeObjectSerializer());
     }
 }

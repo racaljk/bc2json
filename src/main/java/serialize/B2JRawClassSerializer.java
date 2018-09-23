@@ -1,5 +1,6 @@
 package serialize;
 
+import b2j.Option;
 import classfile.constantpool.ConstantClassInfo;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,19 +12,21 @@ import util.Readability;
 import java.lang.reflect.Type;
 
 public class B2JRawClassSerializer implements JsonSerializer<B2JRawClass> {
-    private boolean moreReadable;
+    private Option option;
 
-    public B2JRawClassSerializer(boolean moreReadable) {
-        this.moreReadable = moreReadable;
+    public B2JRawClassSerializer(Option option) {
+        this.option = option;
     }
 
     @Override
     public JsonElement serialize(B2JRawClass b2JRawClass, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonObject jsonRaw = new JsonObject();
-        if (moreReadable) {
+        if (option.isMoreReadable()) {
             jsonRaw.addProperty("magic", "cafebabe");
             jsonRaw.addProperty("version", b2JRawClass.major_version.getValue() + "." + b2JRawClass.minor_version.getValue());
-            jsonRaw.add("constants", jsonSerializationContext.serialize(b2JRawClass.pool_slots));
+            if (!option.isIgnoreConstantPool()) {
+                jsonRaw.add("constants", jsonSerializationContext.serialize(b2JRawClass.pool_slots));
+            }
             jsonRaw.addProperty("access_flag", Readability.getClassAccessFlagString(b2JRawClass.access_flag.getValue()));
             jsonRaw.addProperty("this_class",
                     b2JRawClass.pool_slots.at(
@@ -41,7 +44,9 @@ public class B2JRawClassSerializer implements JsonSerializer<B2JRawClass> {
             jsonRaw.addProperty("magic", b2JRawClass.magic);
             jsonRaw.addProperty("minor_version", b2JRawClass.minor_version.getValue());
             jsonRaw.addProperty("major_version", b2JRawClass.major_version.getValue());
-            jsonRaw.add("constants", jsonSerializationContext.serialize(b2JRawClass.pool_slots));
+            if (!option.isIgnoreConstantPool()) {
+                jsonRaw.add("constants", jsonSerializationContext.serialize(b2JRawClass.pool_slots));
+            }
             jsonRaw.addProperty("access_flag", b2JRawClass.access_flag.getValue());
             jsonRaw.addProperty("this_class",
                     ((ConstantClassInfo) b2JRawClass.pool_slots.at(b2JRawClass.this_class.getValue())).nameIndex.getValue()
@@ -51,11 +56,18 @@ public class B2JRawClassSerializer implements JsonSerializer<B2JRawClass> {
             );
         }
 
-
-        jsonRaw.add("interfaces", jsonSerializationContext.serialize(b2JRawClass.interfaces));
-        jsonRaw.add("fields", jsonSerializationContext.serialize(b2JRawClass.fields));
-        jsonRaw.add("methods", jsonSerializationContext.serialize(b2JRawClass.methods));
-        jsonRaw.add("classfile_attributes", jsonSerializationContext.serialize(b2JRawClass.classfile_attributes));
+        if (!option.isIgnoreInterfaces()) {
+            jsonRaw.add("interfaces", jsonSerializationContext.serialize(b2JRawClass.interfaces));
+        }
+        if (!option.isIgnoreFields()) {
+            jsonRaw.add("fields", jsonSerializationContext.serialize(b2JRawClass.fields));
+        }
+        if (!option.isIgnoreMethods()) {
+            jsonRaw.add("methods", jsonSerializationContext.serialize(b2JRawClass.methods));
+        }
+        if (!option.isIgnoreClassFileAttribute()) {
+            jsonRaw.add("classfile_attributes", jsonSerializationContext.serialize(b2JRawClass.classfile_attributes));
+        }
         return jsonRaw;
     }
 

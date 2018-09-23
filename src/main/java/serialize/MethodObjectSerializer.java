@@ -1,5 +1,6 @@
 package serialize;
 
+import b2j.Option;
 import classfile.constant.Mnemonic;
 import com.google.gson.*;
 import dataobject.MethodObject;
@@ -9,11 +10,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
-    private boolean moreReadable;
+    private Option option;
 
-    public MethodObjectSerializer(boolean moreReadable) {
-        this.moreReadable = moreReadable;
+    public MethodObjectSerializer(Option option) {
+        this.option = option;
     }
+
 
     @Override
     public JsonElement serialize(MethodObject m, Type serializeType, JsonSerializationContext jsonSerializationContext) {
@@ -22,7 +24,7 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
         for (String[] method : methods) {
             JsonObject jsonMethod = new JsonObject();
 
-            if (moreReadable) {
+            if (option.isMoreReadable()) {
                 jsonMethod.addProperty("method_signature", Readability.getMethodAccessFlagString(Integer.valueOf(method[2])) + Readability.peelMethodDescriptor(method[0], method[1]));
                 StringBuilder sb = new StringBuilder();
                 String[] opcodes = method[3].split(",");

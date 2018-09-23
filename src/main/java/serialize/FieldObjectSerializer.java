@@ -1,5 +1,6 @@
 package serialize;
 
+import b2j.Option;
 import com.google.gson.*;
 import dataobject.FieldObject;
 import util.Readability;
@@ -7,10 +8,10 @@ import util.Readability;
 import java.lang.reflect.Type;
 
 public class FieldObjectSerializer implements JsonSerializer<FieldObject> {
-    private boolean moreReadable;
+    private Option option;
 
-    public FieldObjectSerializer(boolean moreReadable) {
-        this.moreReadable = moreReadable;
+    public FieldObjectSerializer(Option option) {
+        this.option = option;
     }
 
     @Override
@@ -19,7 +20,7 @@ public class FieldObjectSerializer implements JsonSerializer<FieldObject> {
         String[][] fields = f.toStringMatrix();
         for (int i = 0; i < fields.length; i++) {
             JsonObject jsonField = new JsonObject();
-            if (moreReadable) {
+            if (option.isMoreReadable()) {
                 jsonField.addProperty("field",
                         Readability.getFieldAccessFlagString(Integer.valueOf(fields[i][2])) +
                                 Readability.peelFieldDescriptor(fields[i][1]) + " " +
