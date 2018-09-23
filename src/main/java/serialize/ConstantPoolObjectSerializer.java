@@ -30,7 +30,7 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
         for (AbstractConstantPool x : cp.getSlots()) {
             JsonObject jsonSlot = new JsonObject();
             jsonSlot.addProperty("index", x.getTableIndex());
-            jsonSlot.addProperty("type", x.getClass().getTypeName());
+            jsonSlot.addProperty("type", x.getClass().getSimpleName());
 
             if (x instanceof ConstantClassInfo) {
                 String qualifiedClassName = cp.at(((ConstantClassInfo) x).nameIndex.getValue()).toString();

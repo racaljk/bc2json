@@ -7,10 +7,8 @@ import java.util.ArrayList;
 public class Launcher {
     public static void main(String[] args) {
         ArrayList<String> bytecodeFiles = getFiles("./src/test/java/java");
-        int coutner = 0;
         for (String bytecodeFile : bytecodeFiles) {
-            System.out.println("=====" + bytecodeFile + "" + coutner);
-            coutner++;
+            System.out.println("=====" + bytecodeFile);
             B2Json b2Json = B2Json.fromFilePath(bytecodeFile);
             b2Json.withOption(OptionConst.PRETTY_PRINTING);
             b2Json.withOption(OptionConst.MORE_READABLE);
