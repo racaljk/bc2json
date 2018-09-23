@@ -28,14 +28,14 @@ public class B2JRawClassSerializer implements JsonSerializer<B2JRawClass> {
             jsonRaw.addProperty("this_class",
                     b2JRawClass.pool_slots.at(
                             ((ConstantClassInfo) b2JRawClass.pool_slots.at(b2JRawClass.this_class.getValue())).nameIndex.getValue()
-                    ).toString()
+                    ).toString().replaceAll("/", ".")
             );
 
             jsonRaw.addProperty("super_class", b2JRawClass.super_class.getValue() != 0 ?
                     b2JRawClass.pool_slots.at(
                             ((ConstantClassInfo) b2JRawClass.pool_slots.at(b2JRawClass.super_class.getValue())).nameIndex.getValue()
-                    ).toString()
-                    : "java/lang/Object"
+                    ).toString().replaceAll("/", ".")
+                    : "java.lang.Object"
             );
         } else {
             jsonRaw.addProperty("magic", b2JRawClass.magic);

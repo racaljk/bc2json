@@ -102,7 +102,7 @@ You can set these options according to your demands
   },
   "access_flag": "public super ",
   "this_class": "Test",
-  "super_class": "java/lang/Object",
+  "super_class": "java.lang.Object",
   "interfaces": [],
   "fields": [
     {
