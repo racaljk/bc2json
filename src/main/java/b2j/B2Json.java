@@ -38,6 +38,7 @@ public class B2Json {
         switch (opt) {
             case PRETTY_PRINTING:
                 builder.setPrettyPrinting();
+                break;
             case MORE_READABLE:
                 moreReadable = true;
                 break;

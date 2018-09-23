@@ -22,6 +22,7 @@ System.out.println(result);
 b2Json.toJsonFile("test.json");
 ```
 # Demonstrations of these options
+You can set these options according to your demands
 + `Without any options` 
 ```javascript
 {"magic":-889275714,"minor_version":0,"major_version":52,"constants":{"slotsNum":"37","slots":[{"index":1,"type":"classfile.constantpool.ConstantMethodRefInfo","method_class":"java/lang/Object","method_name":"\u003cinit\u003e","method_type":"()V"},...]},"access_flag":33,"this_class":"Test","super_class":"java/lang/Object","interfaces":[],"fields":[{"field_name":"greeting","field_type":"Ljava/lang/String;","access_flag":"26"}],"methods":[{"method_name":"\u003cinit\u003e","method_type":"()V","method_flag":"1","method_opcode":"42,183,0,1,177"},...],"classfile_attributes":[{"attribute_name":"SourceFileAttribute","source_file":"Test.java"},...]}
@@ -29,8 +30,9 @@ b2Json.toJsonFile("test.json");
 + `Option.PRETTY_PRINTING`
 ```javascript
 {
-  "magic": "cafebabe",
-  "version": "52.0",
+  "magic": -889275714,
+  "minor_version": 0,
+  "major_version": 52,
   "constants": {
     "slotsNum": "37",
     "slots": [
@@ -44,19 +46,23 @@ b2Json.toJsonFile("test.json");
       ...
     ]
   },
-  "access_flag": "ACC_PUBLIC ACC_SUPER ",
+  "access_flag": 33,
   "this_class": "Test",
   "super_class": "java/lang/Object",
   "interfaces": [],
   "fields": [
     {
-      "field": "private static final  Ljava/lang/String; greeting"
+      "field_name": "greeting",
+      "field_type": "Ljava/lang/String;",
+      "access_flag": "26"
     }
   ],
   "methods": [
     {
-      "method_signature": "public  \u003cinit\u003e ()V",
-      "method_opcode": "aload_0,invokespecial,nop,aconst_null,return$"
+      "method_name": "\u003cinit\u003e",
+      "method_type": "()V",
+      "method_flag": "1",
+      "method_opcode": "42,183,0,1,177"
     },
     ...
   ],
@@ -117,7 +123,6 @@ b2Json.toJsonFile("test.json");
 
 # More
 + Parsing behaviors are based on jvm8 specification. All elements on specification would be parsed into json.
-+ You can ignore somewhat meaningless fields according to demands
 
 # License
 Yes, I love the [MIT LICENSE](LICENSE)
