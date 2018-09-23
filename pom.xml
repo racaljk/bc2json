@@ -12,6 +12,13 @@
     <description>Convert java bytecode to json representation</description>
     <url>https://github.com/racaljk/bc2json</url>
 
+    <licenses>
+        <license>
+            <name>The MIT LICENSE</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
     <build>
         <plugins>
             <plugin>

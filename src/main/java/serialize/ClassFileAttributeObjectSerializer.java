@@ -1,28 +1,31 @@
 package serialize;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
+import classfile.attribute.Attribute;
+import classfile.attribute.InnerClassAttribute;
+import classfile.attribute.SourceFileAttribute;
+import com.google.gson.*;
 import dataobject.ClassFileAttributeObject;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class ClassFileAttributeObjectSerializer implements JsonSerializer<ClassFileAttributeObject> {
     @Override
     public JsonElement serialize(ClassFileAttributeObject a, Type serializeType, JsonSerializationContext jsonSerializationContext) {
         JsonArray attrJson = new JsonArray();
-        ArrayList<ArrayList<String>> res = a.toStringMatrix();
 
-        for (ArrayList<String> arr : res) {
-            JsonArray arrJson = new JsonArray();
-            for (String str : arr) {
-                arrJson.add(str);
+
+        for (Attribute attr : a.getAttributes()) {
+            JsonObject oneAttrJson = new JsonObject();
+            oneAttrJson.addProperty("attribute_name", SourceFileAttribute.class.getSimpleName());
+
+            if (attr instanceof SourceFileAttribute) {
+                oneAttrJson.addProperty("source_file", a.getCp().at(((SourceFileAttribute) attr).getSourceFileIndex().getValue()).toString());
+            } else if (attr instanceof InnerClassAttribute) {
+                //TODO:
             }
-            attrJson.add(arrJson);
-        }
 
+            attrJson.add(oneAttrJson);
+        }
         return attrJson;
     }
 }

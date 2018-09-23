@@ -15,15 +15,6 @@ import java.io.IOException;
 
 public class B2Json {
     private static GsonBuilder builder = new GsonBuilder();
-
-    static {
-        builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer());
-        builder.registerTypeAdapter(FieldObject.class, new FieldObjectSerializer());
-        builder.registerTypeAdapter(InterfacesObject.class, new InterfacesObjectSerializer());
-        builder.registerTypeAdapter(MethodObject.class, new MethodObjectSerializer());
-        builder.registerTypeAdapter(ClassFileAttributeObject.class, new ClassFileAttributeObjectSerializer());
-    }
-
     private B2JRawClass raw;
     private boolean moreReadable = false;
 
@@ -55,13 +46,13 @@ public class B2Json {
     }
 
     public String toJsonString() {
-        builder.registerTypeAdapter(B2JRawClass.class, new B2JRawClassSerializer(moreReadable));
+        registerSerializer();
         Gson gson = builder.create();
         return gson.toJson(raw);
     }
 
     public void toJsonFile(String fileName) {
-        builder.registerTypeAdapter(B2JRawClass.class, new B2JRawClassSerializer(moreReadable));
+        registerSerializer();
         File file = new File(fileName);
         Gson gson = builder.create();
         try {
@@ -74,5 +65,14 @@ public class B2Json {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void registerSerializer() {
+        builder.registerTypeAdapter(B2JRawClass.class, new B2JRawClassSerializer(moreReadable));
+        builder.registerTypeAdapter(ConstantPoolObject.class, new ConstantPoolObjectSerializer());
+        builder.registerTypeAdapter(FieldObject.class, new FieldObjectSerializer(moreReadable));
+        builder.registerTypeAdapter(InterfacesObject.class, new InterfacesObjectSerializer());
+        builder.registerTypeAdapter(MethodObject.class, new MethodObjectSerializer(moreReadable));
+        builder.registerTypeAdapter(ClassFileAttributeObject.class, new ClassFileAttributeObjectSerializer());
     }
 }

@@ -5,7 +5,6 @@ import adt.u2;
 import adt.u4;
 import classfile.attribute.Attribute;
 import classfile.attribute.CodeAttribute;
-import classfile.attribute.SourceFileAttribute;
 import classfile.constantpool.AbstractConstantPool;
 import classfile.constantpool.ConstantUtf8Info;
 import classfile.factory.AttributeFactory;
@@ -19,6 +18,15 @@ import java.util.ArrayList;
 
 public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffable {
     private int attributeCount;
+
+    public ArrayList<Attribute> getAttributes() {
+        return attributes;
+    }
+
+    public ConstantPoolObject getCp() {
+        return cp;
+    }
+
     private ArrayList<Attribute> attributes;
     private u1[] customAttribute;
     private ConstantPoolObject cp;
@@ -60,19 +68,5 @@ public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffa
                 throw new RuntimeException("class load exception");
             }
         }
-    }
-
-    public ArrayList<ArrayList<String>> toStringMatrix() {
-        ArrayList<ArrayList<String>> res = new ArrayList<>();
-
-        for (Attribute attr : attributes) {
-            ArrayList<String> arr = new ArrayList<>();
-            if (attr instanceof SourceFileAttribute) {
-                arr.add("SourceFileAttribute");
-                arr.add(cp.at(((SourceFileAttribute) attr).getSourceFileIndex().getValue()).toString());
-            }
-            res.add(arr);
-        }
-        return res;
     }
 }
