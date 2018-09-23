@@ -21,7 +21,7 @@ public class FieldObjectSerializer implements JsonSerializer<FieldObject> {
             JsonObject jsonField = new JsonObject();
             if (moreReadable) {
                 jsonField.addProperty("field",
-                        Readability.getFieldAccessFlagString(Integer.valueOf(fields[i][2])) + " " +
+                        Readability.getFieldAccessFlagString(Integer.valueOf(fields[i][2])) +
                                 Readability.peelFieldDescriptor(fields[i][1]) + " " +
                                 fields[i][0]);
             } else {

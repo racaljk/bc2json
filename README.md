@@ -53,8 +53,8 @@ You can set these options according to your demands
     ]
   },
   "access_flag": 33,
-  "this_class": "Test",
-  "super_class": "java/lang/Object",
+  "this_class": 26,
+  "super_class": 30,
   "interfaces": [],
   "fields": [
     {
@@ -106,7 +106,7 @@ You can set these options according to your demands
   "interfaces": [],
   "fields": [
     {
-      "field": "private static final  java.lang.String greeting"
+      "field": "private static final java.lang.String greeting"
     }
   ],
   "methods": [
