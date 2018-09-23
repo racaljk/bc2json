@@ -6,7 +6,7 @@ import parser.ClassFileReader;
 import java.io.IOException;
 
 public class SignatureAttribute extends Attribute {
-    private u2 signatureIndex;
+    public u2 signatureIndex;
 
     public SignatureAttribute(ClassFileReader reader) {
         super(reader);

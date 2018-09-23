@@ -1,8 +1,6 @@
 package serialize;
 
-import classfile.attribute.Attribute;
-import classfile.attribute.InnerClassAttribute;
-import classfile.attribute.SourceFileAttribute;
+import classfile.attribute.*;
 import com.google.gson.*;
 import dataobject.ClassFileAttributeObject;
 
@@ -16,7 +14,7 @@ public class ClassFileAttributeObjectSerializer implements JsonSerializer<ClassF
 
         for (Attribute attr : a.getAttributes()) {
             JsonObject oneAttrJson = new JsonObject();
-            oneAttrJson.addProperty("attribute_name", SourceFileAttribute.class.getSimpleName());
+            oneAttrJson.addProperty("attribute_name", attr.getClass().getSimpleName());
 
             if (attr instanceof SourceFileAttribute) {
                 oneAttrJson.addProperty("source_file", a.getCp().at(((SourceFileAttribute) attr).getSourceFileIndex().getValue()).toString());
@@ -39,8 +37,29 @@ public class ClassFileAttributeObjectSerializer implements JsonSerializer<ClassF
                     innerClassArrJson.add(innerClassJson);
                 }
                 oneAttrJson.add("inner_classes", innerClassArrJson);
+            } else if (attr instanceof EnclosingMethodAttribute) {
+                oneAttrJson.addProperty("class_index", ((EnclosingMethodAttribute) attr).classIndex.getValue());
+                oneAttrJson.addProperty("method_index", ((EnclosingMethodAttribute) attr).methodIndex.getValue());
+            } else if (attr instanceof SourceDebugExtensionAttribute) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < ((SourceDebugExtensionAttribute) attr).debugExtension.length; i++) {
+                    sb.append(((SourceDebugExtensionAttribute) attr).debugExtension[i].getValue());
+                    sb.append(",");
+                }
+                oneAttrJson.addProperty("debug_extension", sb.toString());
+            } else if (attr instanceof SyntheticAttribute || attr instanceof DeprecatedAttribute) {
+                //THERE ARE NO PROPERTIES
+            } else if (attr instanceof SignatureAttribute) {
+                oneAttrJson.addProperty("signature_index", ((SignatureAttribute) attr).signatureIndex.getValue());
             }
-
+            /*
+            TODO: CONSIDER TO SUPPORT THEM
+            else if(attr instanceof RuntimeVisibleAnnotationsAttribute){
+            }else if(attr instanceof RuntimeInvisibleAnnotationsAttribute){
+            }else if(attr instanceof RuntimeVisibleTypeAnnotationsAttribute){
+            }else if(attr instanceof RuntimeInvisibleTypeAnnotationsAttribute){
+            }else if(attr instanceof BootstrapMethodsAttribute){
+            }*/
             attrJson.add(oneAttrJson);
         }
         return attrJson;

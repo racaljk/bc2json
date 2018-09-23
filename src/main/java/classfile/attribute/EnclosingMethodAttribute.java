@@ -6,8 +6,8 @@ import parser.ClassFileReader;
 import java.io.IOException;
 
 public class EnclosingMethodAttribute extends Attribute {
-    private u2 classIndex;
-    private u2 methodIndex;
+    public u2 classIndex;
+    public u2 methodIndex;
 
     public EnclosingMethodAttribute(ClassFileReader reader) {
         super(reader);

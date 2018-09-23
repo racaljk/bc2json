@@ -6,7 +6,7 @@ import parser.ClassFileReader;
 import java.io.IOException;
 
 public class SourceDebugExtensionAttribute extends Attribute {
-    private u1[] debugExtension;
+    public u1[] debugExtension;
 
     public SourceDebugExtensionAttribute(ClassFileReader reader) {
         super(reader);
