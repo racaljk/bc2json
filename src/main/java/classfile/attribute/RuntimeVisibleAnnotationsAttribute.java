@@ -1,7 +1,7 @@
 package classfile.attribute;
 
 import adt.u2;
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 import parser.ClassFileReader;
 
 import java.io.IOException;

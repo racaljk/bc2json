@@ -2,8 +2,8 @@ package dataobject;
 
 import adt.u1;
 import classfile.attribute.CodeAttribute;
+import classfile.exception.ClassLoadingException;
 import classfile.field.FieldInfo;
-import exception.ClassLoadingException;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;

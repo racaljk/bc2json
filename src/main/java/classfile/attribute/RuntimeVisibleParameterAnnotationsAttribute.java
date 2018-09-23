@@ -2,7 +2,7 @@ package classfile.attribute;
 
 import adt.u1;
 import adt.u2;
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 import parser.ClassFileReader;
 import parser.Stuffable;
 

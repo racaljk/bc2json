@@ -1,7 +1,7 @@
 package dataobject;
 
+import classfile.exception.ClassLoadingException;
 import classfile.field.FieldInfo;
-import exception.ClassLoadingException;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;

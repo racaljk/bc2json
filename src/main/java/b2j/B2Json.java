@@ -1,9 +1,9 @@
 package b2j;
 
+import classfile.exception.ClassLoadingException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dataobject.*;
-import exception.ClassLoadingException;
 import parser.B2JClassLoader;
 import parser.B2JRawClass;
 import serialize.*;

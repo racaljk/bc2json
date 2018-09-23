@@ -5,9 +5,9 @@ import adt.u2;
 import adt.u4;
 import classfile.constantpool.AbstractConstantPool;
 import classfile.constantpool.ConstantUtf8Info;
+import classfile.exception.ClassLoadingException;
 import classfile.factory.AttributeFactory;
 import dataobject.ConstantPoolObject;
-import exception.ClassLoadingException;
 import parser.ClassFileReader;
 
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class CodeAttribute extends Attribute {
         for (int t = 0; t < attributesCount.getValue(); t++) {
             u2 attributeNameIndex = read2Bytes();
             AbstractConstantPool cb = constantPoolObject.at(attributeNameIndex.getValue());
-            //if it's not a classfile.constant utf-8 info structure then throws an exception
+            //if it's not a classfile.constant utf-8 info structure then throws an classfile.exception
 
             if (cb instanceof ConstantUtf8Info) {
                 Attribute codeAttr = AttributeFactory.create(getReader(), cb.toString());
@@ -95,7 +95,7 @@ public class CodeAttribute extends Attribute {
                     }
                 }
             } else {
-                throw new ClassLoadingException(t + "," + "class load exception");
+                throw new ClassLoadingException(t + "," + "class load classfile.exception");
             }
         }
     }

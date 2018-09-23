@@ -111,7 +111,7 @@ You can set these options according to your demands
   ],
   "methods": [
     {
-      "method_signature": "public  \u003cinit\u003e ()V",
+      "method_signature": "public \u003cinit\u003e()",
       "method_opcode": "aload_0,invokespecial,nop,aconst_null,return"
     },
     ...

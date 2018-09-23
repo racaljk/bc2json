@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import parser.B2JRawClass;
-import parser.Readability;
 
 import java.lang.reflect.Type;
 

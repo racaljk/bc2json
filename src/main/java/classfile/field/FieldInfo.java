@@ -7,9 +7,9 @@ import classfile.attribute.Attribute;
 import classfile.attribute.CodeAttribute;
 import classfile.constantpool.AbstractConstantPool;
 import classfile.constantpool.ConstantUtf8Info;
+import classfile.exception.ClassLoadingException;
 import classfile.factory.AttributeFactory;
 import dataobject.ConstantPoolObject;
-import exception.ClassLoadingException;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;
@@ -46,7 +46,7 @@ public class FieldInfo extends BytesReaderProxy implements Stuffable {
             u2 attributeNameIndex = read2Bytes();
             AbstractConstantPool cb = constantPoolObject.at(attributeNameIndex.getValue());
 
-            //if it's not a classfile.constant utf-8 info structure then throws an exception
+            //if it's not a classfile.constant utf-8 info structure then throws an classfile.exception
             if (cb instanceof ConstantUtf8Info) {
                 Attribute attr = AttributeFactory.create(getReader(), cb.toString());
 
@@ -67,7 +67,7 @@ public class FieldInfo extends BytesReaderProxy implements Stuffable {
                     }
                 }
             } else {
-                throw new ClassLoadingException(nameIndex.getValue() + "," + descriptorIndex.getValue() + "," + attributeCount.getValue() + "," + attributeNameIndex.getValue() + "class load exception");
+                throw new ClassLoadingException(nameIndex.getValue() + "," + descriptorIndex.getValue() + "," + attributeCount.getValue() + "," + attributeNameIndex.getValue() + "class load classfile.exception");
             }
         }
     }

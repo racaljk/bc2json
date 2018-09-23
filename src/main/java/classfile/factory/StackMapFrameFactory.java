@@ -2,7 +2,7 @@ package classfile.factory;
 
 import classfile.attribute.stackmaptable.StackMapFrame;
 import classfile.attribute.stackmaptable.StackMapTableAttribute;
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 
 public class StackMapFrameFactory {
     private static boolean atRange(int num, int l, int r) {

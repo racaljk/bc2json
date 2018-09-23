@@ -2,7 +2,7 @@ package classfile.factory;
 
 import classfile.constant.ConstantPoolTags;
 import classfile.constantpool.*;
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 import parser.ClassFileReader;
 
 public class ConstantPoolSFactory {

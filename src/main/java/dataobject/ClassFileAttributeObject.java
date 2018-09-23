@@ -7,8 +7,8 @@ import classfile.attribute.Attribute;
 import classfile.attribute.CodeAttribute;
 import classfile.constantpool.AbstractConstantPool;
 import classfile.constantpool.ConstantUtf8Info;
+import classfile.exception.ClassLoadingException;
 import classfile.factory.AttributeFactory;
-import exception.ClassLoadingException;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;
@@ -45,7 +45,7 @@ public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffa
 
             //We need to check if it's a \"ConstantUtf8Info\" instance"
             AbstractConstantPool cb = cp.at(attributeNameIndex.getValue());
-            //if it's not a classfile.constant utf-8 info structure then throws an exception
+            //if it's not a classfile.constant utf-8 info structure then throws an classfile.exception
             if (cb instanceof ConstantUtf8Info) {
                 Attribute attr = AttributeFactory.create(getReader(), cb.toString());
 
@@ -65,7 +65,7 @@ public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffa
                     }
                 }
             } else {
-                throw new RuntimeException("class load exception");
+                throw new RuntimeException("class load classfile.exception");
             }
         }
     }

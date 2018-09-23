@@ -1,7 +1,7 @@
 package classfile.factory;
 
 import classfile.attribute.typeannotation.*;
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 import parser.ClassFileReader;
 
 public class TargetFactory {

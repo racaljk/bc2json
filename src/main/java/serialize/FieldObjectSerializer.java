@@ -2,7 +2,6 @@ package serialize;
 
 import com.google.gson.*;
 import dataobject.FieldObject;
-import parser.Readability;
 
 import java.lang.reflect.Type;
 

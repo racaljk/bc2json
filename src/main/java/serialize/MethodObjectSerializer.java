@@ -3,7 +3,6 @@ package serialize;
 import classfile.constant.Mnemonic;
 import com.google.gson.*;
 import dataobject.MethodObject;
-import parser.Readability;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -23,7 +22,7 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
             JsonObject jsonMethod = new JsonObject();
 
             if (moreReadable) {
-                jsonMethod.addProperty("method_signature", Readability.getMethodAccessFlagString(Integer.valueOf(method[2])) + " " + method[0] + " " + method[1]);
+                jsonMethod.addProperty("method_signature", Readability.getMethodAccessFlagString(Integer.valueOf(method[2])) + Readability.peelMethodDescriptor(method[0], method[1]));
                 StringBuilder sb = new StringBuilder();
                 String[] opcodes = method[3].split(",");
                 Field[] mnemonicFields = Mnemonic.class.getDeclaredFields();

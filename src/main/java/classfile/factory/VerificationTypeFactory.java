@@ -3,7 +3,7 @@ package classfile.factory;
 import classfile.attribute.stackmaptable.StackMapTableAttribute;
 import classfile.attribute.stackmaptable.VerificationTypeInfo;
 import classfile.constant.VerificationTypeItems;
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 
 public class VerificationTypeFactory {
     public static VerificationTypeInfo create(StackMapTableAttribute outer, int n) throws ClassLoadingException {

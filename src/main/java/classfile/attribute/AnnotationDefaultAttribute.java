@@ -1,6 +1,6 @@
 package classfile.attribute;
 
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 import parser.ClassFileReader;
 
 import java.io.IOException;

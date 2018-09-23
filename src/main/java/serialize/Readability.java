@@ -1,4 +1,4 @@
-package parser;
+package serialize;
 
 public class Readability {
     public static String getFieldAccessFlagString(int acc) {
@@ -105,9 +105,16 @@ public class Readability {
     }
 
     public static String peelFieldDescriptor(String str) {
+        if (str.length() == 0) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder();
         int i = 0;
+        int fieldCount = 0;
         while (i < str.length()) {
+            if (fieldCount > 1) {
+                sb.append(", ");
+            }
             switch (str.charAt(i)) {
                 case 'B':
                     sb.append("byte");
@@ -126,6 +133,9 @@ public class Readability {
                     break;
                 case 'J':
                     sb.append("long");
+                    break;
+                case 'V':
+                    sb.append("void");
                     break;
                 case 'L':
                     i++;
@@ -178,10 +188,25 @@ public class Readability {
                     }
                     sb.append(component);
                     break;
-
             }
+            fieldCount++;
             i++;
         }
+        return sb.toString();
+    }
+
+    public static String peelMethodDescriptor(String name, String descriptor) {
+        if (name.equals("<clinit>")) {
+            return "public <clinit>()";
+        }
+        StringBuilder sb = new StringBuilder();
+        String returnType = peelFieldDescriptor(descriptor.substring(descriptor.indexOf(")") + 1));
+        sb.append(returnType);
+        sb.append(" ");
+        sb.append(name);
+        sb.append("(");
+        sb.append(peelFieldDescriptor(descriptor.substring(descriptor.indexOf("("), descriptor.lastIndexOf(")"))));
+        sb.append(")");
         return sb.toString();
     }
 }

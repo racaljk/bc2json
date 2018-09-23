@@ -1,6 +1,6 @@
 package parser;
 
-import exception.ClassLoadingException;
+import classfile.exception.ClassLoadingException;
 
 import java.io.IOException;
 
