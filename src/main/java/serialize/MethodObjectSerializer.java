@@ -26,26 +26,29 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
 
             if (option.isMoreReadable()) {
                 jsonMethod.addProperty("method_signature", Readability.getMethodAccessFlagString(Integer.valueOf(method[2])) + Readability.peelMethodDescriptor(method[0], method[1]));
-                StringBuilder sb = new StringBuilder();
-                String[] opcodes = method[3].split(",");
-                Field[] mnemonicFields = Mnemonic.class.getDeclaredFields();
-                for (int i = 0; i < opcodes.length; i++) {
-                    for (int k = 0; k < mnemonicFields.length; k++) {
-                        try {
-                            if (mnemonicFields[k].getInt(null) == Integer.valueOf(opcodes[i])) {
-                                sb.append(mnemonicFields[k].getName().replace("$", ""));
-                                sb.append(",");
-                                break;
+
+                // If the method has opcode
+                if (method[3] != null) {
+                    StringBuilder sb = new StringBuilder();
+                    String[] opcodes = method[3].split(",");
+                    Field[] mnemonicFields = Mnemonic.class.getDeclaredFields();
+                    for (String opcode : opcodes) {
+                        for (Field mnemonicField : mnemonicFields) {
+                            try {
+                                if (mnemonicField.getInt(null) == Integer.valueOf(opcode)) {
+                                    sb.append(mnemonicField.getName().replace("$", ""));
+                                    sb.append(",");
+                                    break;
+                                }
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
                             }
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
                         }
                     }
+                    if (sb.toString().length() > 0) {
+                        jsonMethod.addProperty("method_opcode", sb.toString().substring(0, sb.toString().length() - 1));
+                    }
                 }
-                if (sb.toString().length() > 0) {
-                    jsonMethod.addProperty("method_opcode", sb.toString().substring(0, sb.toString().length() - 1));
-                }
-
             } else {
                 jsonMethod.addProperty("method_name", method[0]);
                 jsonMethod.addProperty("method_type", method[1]);

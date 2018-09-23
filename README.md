@@ -95,9 +95,8 @@ You can set these options according to your demands
       {
         "index": 1,
         "type": "classfile.constantpool.ConstantMethodRefInfo",
-        "method_class": "java/lang/Object",
-        "method_name": "\u003cinit\u003e",
-        "method_type": "()V"
+        "method_class": "java.lang.Object",
+        "method": " \u003cinit\u003e()"
       },
       ...
     ]
