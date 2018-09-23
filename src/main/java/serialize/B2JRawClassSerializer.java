@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import parser.B2JRawClass;
+import parser.Readability;
 
 import java.lang.reflect.Type;
 
@@ -23,7 +24,7 @@ public class B2JRawClassSerializer implements JsonSerializer<B2JRawClass> {
             jsonRaw.addProperty("magic", "cafebabe");
             jsonRaw.addProperty("version", b2JRawClass.major_version.getValue() + "." + b2JRawClass.minor_version.getValue());
             jsonRaw.add("constants", jsonSerializationContext.serialize(b2JRawClass.pool_slots));
-            jsonRaw.addProperty("access_flag", getAccessFlagString(b2JRawClass.access_flag.getValue()));
+            jsonRaw.addProperty("access_flag", Readability.getClassAccessFlagString(b2JRawClass.access_flag.getValue()));
 
         } else {
             jsonRaw.addProperty("magic", b2JRawClass.magic);
@@ -52,33 +53,4 @@ public class B2JRawClassSerializer implements JsonSerializer<B2JRawClass> {
         return jsonRaw;
     }
 
-    private String getAccessFlagString(int acc) {
-        StringBuilder sb = new StringBuilder();
-
-        if ((acc & 0x0001) != 0) {
-            sb.append("ACC_PUBLIC ");
-        }
-        if ((acc & 0x0010) != 0) {
-            sb.append("ACC_FINAL ");
-        }
-        if ((acc & 0x0020) != 0) {
-            sb.append("ACC_SUPER ");
-        }
-        if ((acc & 0x0200) != 0) {
-            sb.append("ACC_INTERFACE ");
-        }
-        if ((acc & 0x0400) != 0) {
-            sb.append("ACC_ABSTRACT ");
-        }
-        if ((acc & 0x1000) != 0) {
-            sb.append("ACC_SYNTHETIC ");
-        }
-        if ((acc & 0x2000) != 0) {
-            sb.append("ACC_ANNOTATION ");
-        }
-        if ((acc & 0x4000) != 0) {
-            sb.append("ACC_ENUM ");
-        }
-        return sb.toString();
-    }
 }

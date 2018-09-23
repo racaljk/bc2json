@@ -25,7 +25,13 @@ b2Json.toJsonFile("test.json");
 You can set these options according to your demands
 + `Without any options` 
 ```javascript
-{"magic":-889275714,"minor_version":0,"major_version":52,"constants":{"slotsNum":"37","slots":[{"index":1,"type":"classfile.constantpool.ConstantMethodRefInfo","method_class":"java/lang/Object","method_name":"\u003cinit\u003e","method_type":"()V"},...]},"access_flag":33,"this_class":"Test","super_class":"java/lang/Object","interfaces":[],"fields":[{"field_name":"greeting","field_type":"Ljava/lang/String;","access_flag":"26"}],"methods":[{"method_name":"\u003cinit\u003e","method_type":"()V","method_flag":"1","method_opcode":"42,183,0,1,177"},...],"classfile_attributes":[{"attribute_name":"SourceFileAttribute","source_file":"Test.java"},...]}
+{"magic":-889275714,"minor_version":0,"major_version":52,"constants":{"slotsNum":"37","slots":[
+{"index":1,"type":"classfile.constantpool.ConstantMethodRefInfo","method_class":"java/lang/Object",
+"method_name":"\u003cinit\u003e","method_type":"()V"},...]},"access_flag":33,"this_class":"Test",
+"super_class":"java/lang/Object","interfaces":[],"fields":[{"field_name":"greeting","field_type":
+"Ljava/lang/String;","access_flag":"26"}],"methods":[{"method_name":"\u003cinit\u003e","method_type"
+:"()V","method_flag":"1","method_opcode":"42,183,0,1,177"},...],"classfile_attributes":[{"attribute_name":
+"SourceFileAttribute","source_file":"Test.java"},...]}
 ```
 + `Option.PRETTY_PRINTING`
 ```javascript
@@ -100,7 +106,7 @@ You can set these options according to your demands
   "interfaces": [],
   "fields": [
     {
-      "field": "private static final  Ljava/lang/String; greeting"
+      "field": "private static final  java.lang.String greeting"
     }
   ],
   "methods": [
@@ -118,7 +124,6 @@ You can set these options according to your demands
     ...
   ]
 }
-
 ```
 
 # More
