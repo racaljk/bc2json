@@ -3,12 +3,12 @@ package classfile.attribute;
 import adt.u1;
 import adt.u2;
 import adt.u4;
-import bcm.ClassFileReader;
 import classfile.constantpool.AbstractConstantPool;
 import classfile.constantpool.ConstantUtf8Info;
 import classfile.factory.AttributeFactory;
 import dataobject.ConstantPoolObject;
 import exception.ClassLoadingException;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 

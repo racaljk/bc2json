@@ -3,9 +3,6 @@ package classfile.field;
 import adt.u1;
 import adt.u2;
 import adt.u4;
-import bcm.BytesReaderProxy;
-import bcm.ClassFileReader;
-import bcm.Stuffable;
 import classfile.attribute.Attribute;
 import classfile.attribute.CodeAttribute;
 import classfile.constantpool.AbstractConstantPool;
@@ -13,6 +10,9 @@ import classfile.constantpool.ConstantUtf8Info;
 import classfile.factory.AttributeFactory;
 import dataobject.ConstantPoolObject;
 import exception.ClassLoadingException;
+import parser.BytesReaderProxy;
+import parser.ClassFileReader;
+import parser.Stuffable;
 
 import java.io.IOException;
 

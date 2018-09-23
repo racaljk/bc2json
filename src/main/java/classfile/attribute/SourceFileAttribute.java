@@ -1,11 +1,15 @@
 package classfile.attribute;
 
 import adt.u2;
-import bcm.ClassFileReader;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 
 public class SourceFileAttribute extends Attribute {
+    public u2 getSourceFileIndex() {
+        return sourceFileIndex;
+    }
+
     private u2 sourceFileIndex;
 
     public SourceFileAttribute(ClassFileReader reader) {

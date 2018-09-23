@@ -2,8 +2,8 @@ package classfile.constantpool;
 
 import adt.u1;
 import adt.u4;
-import bcm.ClassFileReader;
 import classfile.constant.ConstantPoolTags;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 

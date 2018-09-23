@@ -1,6 +1,6 @@
 package classfile.attribute.typeannotation;
 
-import bcm.ClassFileReader;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 

@@ -2,13 +2,13 @@ package classfile.attribute.stackmaptable;
 
 import adt.u1;
 import adt.u2;
-import bcm.ClassFileReader;
 import classfile.attribute.Attribute;
 import classfile.attribute.ExcludeFields;
 import classfile.constant.VerificationTypeItems;
 import classfile.factory.StackMapFrameFactory;
 import classfile.factory.VerificationTypeFactory;
 import exception.ClassLoadingException;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 import java.util.ArrayList;

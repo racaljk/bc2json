@@ -1,7 +1,7 @@
 package classfile.attribute.typeannotation;
 
 import adt.u2;
-import bcm.ClassFileReader;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 

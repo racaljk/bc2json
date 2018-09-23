@@ -1,4 +1,4 @@
-package bcm;
+package parser;
 
 import exception.ClassLoadingException;
 

@@ -1,8 +1,8 @@
 package classfile.factory;
 
-import bcm.ClassFileReader;
 import classfile.attribute.*;
 import classfile.attribute.stackmaptable.StackMapTableAttribute;
+import parser.ClassFileReader;
 
 public class AttributeFactory {
     public static Attribute create(ClassFileReader reader, String attributeName) {

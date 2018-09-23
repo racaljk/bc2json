@@ -1,4 +1,4 @@
-package bcm;
+package parser;
 
 import adt.u2;
 import adt.u4;
@@ -47,8 +47,8 @@ public class B2JClassLoader {
             raw.methods.stuffing();
 
             u2 classFileAttributeCount = read2Bytes();
-            raw.attrs = new ClassFileAttributeObject(reader, raw.pool_slots, classFileAttributeCount.getValue());
-            raw.attrs.stuffing();
+            raw.classfile_attributes = new ClassFileAttributeObject(reader, raw.pool_slots, classFileAttributeCount.getValue());
+            raw.classfile_attributes.stuffing();
         } catch (IOException e) {
             e.printStackTrace();
         }

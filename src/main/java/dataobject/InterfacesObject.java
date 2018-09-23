@@ -1,10 +1,10 @@
 package dataobject;
 
 import adt.u2;
-import bcm.BytesReaderProxy;
-import bcm.ClassFileReader;
-import bcm.Stuffable;
 import classfile.constantpool.ConstantClassInfo;
+import parser.BytesReaderProxy;
+import parser.ClassFileReader;
+import parser.Stuffable;
 
 import java.io.IOException;
 

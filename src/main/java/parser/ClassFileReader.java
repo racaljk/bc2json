@@ -1,4 +1,4 @@
-package bcm;
+package parser;
 
 import adt.u1;
 import adt.u2;

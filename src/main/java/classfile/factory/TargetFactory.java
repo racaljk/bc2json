@@ -1,8 +1,8 @@
 package classfile.factory;
 
-import bcm.ClassFileReader;
 import classfile.attribute.typeannotation.*;
 import exception.ClassLoadingException;
+import parser.ClassFileReader;
 
 public class TargetFactory {
     public static Target create(ClassFileReader reader, int targetType) throws ClassLoadingException {

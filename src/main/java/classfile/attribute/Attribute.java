@@ -2,9 +2,9 @@ package classfile.attribute;
 
 import adt.u2;
 import adt.u4;
-import bcm.BytesReaderProxy;
-import bcm.ClassFileReader;
-import bcm.Stuffable;
+import parser.BytesReaderProxy;
+import parser.ClassFileReader;
+import parser.Stuffable;
 
 public abstract class Attribute extends BytesReaderProxy implements Stuffable, Verifiable {
     public u2 attributeNameIndex;

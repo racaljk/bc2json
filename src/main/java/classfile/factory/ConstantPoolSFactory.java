@@ -1,9 +1,9 @@
 package classfile.factory;
 
-import bcm.ClassFileReader;
 import classfile.constant.ConstantPoolTags;
 import classfile.constantpool.*;
 import exception.ClassLoadingException;
+import parser.ClassFileReader;
 
 public class ConstantPoolSFactory {
     public static AbstractConstantPool create(ClassFileReader reader, int tag) throws ClassLoadingException {

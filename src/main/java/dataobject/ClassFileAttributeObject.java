@@ -3,26 +3,23 @@ package dataobject;
 import adt.u1;
 import adt.u2;
 import adt.u4;
-import bcm.BytesReaderProxy;
-import bcm.ClassFileReader;
-import bcm.Stuffable;
 import classfile.attribute.Attribute;
 import classfile.attribute.CodeAttribute;
+import classfile.attribute.SourceFileAttribute;
 import classfile.constantpool.AbstractConstantPool;
 import classfile.constantpool.ConstantUtf8Info;
 import classfile.factory.AttributeFactory;
-import com.google.gson.annotations.Expose;
 import exception.ClassLoadingException;
+import parser.BytesReaderProxy;
+import parser.ClassFileReader;
+import parser.Stuffable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffable {
-    @Expose
     private int attributeCount;
-    @Expose
     private ArrayList<Attribute> attributes;
-    @Expose
     private u1[] customAttribute;
     private ConstantPoolObject cp;
 
@@ -63,5 +60,19 @@ public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffa
                 throw new RuntimeException("class load exception");
             }
         }
+    }
+
+    public ArrayList<ArrayList<String>> toStringMatrix() {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+
+        for (Attribute attr : attributes) {
+            ArrayList<String> arr = new ArrayList<>();
+            if (attr instanceof SourceFileAttribute) {
+                arr.add("SourceFileAttribute");
+                arr.add(cp.at(((SourceFileAttribute) attr).getSourceFileIndex().getValue()).toString());
+            }
+            res.add(arr);
+        }
+        return res;
     }
 }

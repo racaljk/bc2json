@@ -2,10 +2,10 @@ package classfile.attribute;
 
 import adt.u1;
 import adt.u2;
-import bcm.BytesReaderProxy;
-import bcm.ClassFileReader;
-import bcm.Stuffable;
 import exception.ClassLoadingException;
+import parser.BytesReaderProxy;
+import parser.ClassFileReader;
+import parser.Stuffable;
 
 import java.io.IOException;
 

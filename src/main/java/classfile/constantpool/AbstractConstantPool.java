@@ -1,8 +1,8 @@
 package classfile.constantpool;
 
-import bcm.BytesReaderProxy;
-import bcm.ClassFileReader;
-import bcm.Stuffable;
+import parser.BytesReaderProxy;
+import parser.ClassFileReader;
+import parser.Stuffable;
 
 
 abstract public class AbstractConstantPool extends BytesReaderProxy implements Stuffable {

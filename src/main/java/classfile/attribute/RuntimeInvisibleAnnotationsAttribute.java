@@ -1,6 +1,6 @@
 package classfile.attribute;
 
-import bcm.ClassFileReader;
+import parser.ClassFileReader;
 
 public class RuntimeInvisibleAnnotationsAttribute extends RuntimeVisibleAnnotationsAttribute {
     public RuntimeInvisibleAnnotationsAttribute(ClassFileReader reader) {

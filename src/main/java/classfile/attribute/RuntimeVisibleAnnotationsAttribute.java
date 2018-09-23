@@ -1,8 +1,8 @@
 package classfile.attribute;
 
 import adt.u2;
-import bcm.ClassFileReader;
 import exception.ClassLoadingException;
+import parser.ClassFileReader;
 
 import java.io.IOException;
 
