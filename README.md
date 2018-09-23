@@ -1,6 +1,7 @@
 # Java bytecode to JSON representation
 
 ![](static/logo.png)
+[![codebeat badge](https://codebeat.co/badges/0d65b756-e695-4e21-8ae2-ff9c11450930)](https://codebeat.co/projects/github-com-racaljk-bc2json-master)
 
 **bc2json** could convert `*.class bytecode` to `json` representation so that we can use it as **a human readable and also the world's most popular IR(ok, that's json)** for further use.
 

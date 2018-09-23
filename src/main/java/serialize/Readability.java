@@ -134,6 +134,12 @@ public class Readability {
                 case 'J':
                     sb.append("long");
                     break;
+                case 'S':
+                    sb.append("short");
+                    break;
+                case 'Z':
+                    sb.append("boolean");
+                    break;
                 case 'V':
                     sb.append("void");
                     break;
@@ -172,6 +178,12 @@ public class Readability {
                             break;
                         case 'J':
                             sb.append("long");
+                            break;
+                        case 'S':
+                            sb.append("short");
+                            break;
+                        case 'Z':
+                            sb.append("boolean");
                             break;
                         case 'L':
                             i++;
