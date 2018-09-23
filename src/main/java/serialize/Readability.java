@@ -200,8 +200,8 @@ public class Readability {
             return "public <clinit>()";
         }
         StringBuilder sb = new StringBuilder();
-        String returnType = peelFieldDescriptor(descriptor.substring(descriptor.indexOf(")") + 1));
-        sb.append(returnType);
+        String returnType = peelFieldDescriptor(descriptor.substring(descriptor.indexOf(")")));
+        sb.append(name.equals("<init>") ? "" : returnType);
         sb.append(" ");
         sb.append(name);
         sb.append("(");
