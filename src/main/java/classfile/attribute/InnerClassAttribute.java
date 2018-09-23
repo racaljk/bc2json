@@ -6,8 +6,8 @@ import parser.ClassFileReader;
 import java.io.IOException;
 
 public class InnerClassAttribute extends Attribute {
-    private u2 numberOfClasses;
-    private CPIndexBundle[] classes;
+    public u2 numberOfClasses;
+    public CPIndexBundle[] classes;
 
     public InnerClassAttribute(ClassFileReader reader) {
         super(reader);
@@ -35,11 +35,11 @@ public class InnerClassAttribute extends Attribute {
         return res;
     }
 
-    class CPIndexBundle {
-        u2 innerClassInfoIndex;
-        u2 outerClassInfoIndex;
-        u2 innerNameIndex;
-        u2 innerClassAccessFlags;
+    public class CPIndexBundle {
+        public u2 innerClassInfoIndex;
+        public u2 outerClassInfoIndex;
+        public u2 innerNameIndex;
+        public u2 innerClassAccessFlags;
 
         void stuffing() throws IOException {
             innerClassInfoIndex = read2Bytes();
