@@ -78,28 +78,28 @@ public class Readability {
         StringBuilder sb = new StringBuilder();
 
         if ((acc & 0x0001) != 0) {
-            sb.append("ACC_PUBLIC ");
+            sb.append("public ");
         }
         if ((acc & 0x0010) != 0) {
-            sb.append("ACC_FINAL ");
+            sb.append("final ");
         }
         if ((acc & 0x0020) != 0) {
-            sb.append("ACC_SUPER ");
+            sb.append("super ");
         }
         if ((acc & 0x0200) != 0) {
-            sb.append("ACC_INTERFACE ");
+            sb.append("interface ");
         }
         if ((acc & 0x0400) != 0) {
-            sb.append("ACC_ABSTRACT ");
+            sb.append("abstract ");
         }
         if ((acc & 0x1000) != 0) {
-            sb.append("ACC_SYNTHETIC ");
+            sb.append("synthetic ");
         }
         if ((acc & 0x2000) != 0) {
-            sb.append("ACC_ANNOTATION ");
+            sb.append("annotation ");
         }
         if ((acc & 0x4000) != 0) {
-            sb.append("ACC_ENUM ");
+            sb.append("enum ");
         }
         return sb.toString();
     }

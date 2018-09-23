@@ -100,7 +100,7 @@ You can set these options according to your demands
       ...
     ]
   },
-  "access_flag": "ACC_PUBLIC ACC_SUPER ",
+  "access_flag": "public super ",
   "this_class": "Test",
   "super_class": "java/lang/Object",
   "interfaces": [],
@@ -112,7 +112,7 @@ You can set these options according to your demands
   "methods": [
     {
       "method_signature": "public  \u003cinit\u003e ()V",
-      "method_opcode": "aload_0,invokespecial,nop,aconst_null,return$"
+      "method_opcode": "aload_0,invokespecial,nop,aconst_null,return"
     },
     ...
   ],

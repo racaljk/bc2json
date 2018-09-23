@@ -31,7 +31,7 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
                     for (int k = 0; k < mnemonicFields.length; k++) {
                         try {
                             if (mnemonicFields[k].getInt(null) == Integer.valueOf(opcodes[i])) {
-                                sb.append(mnemonicFields[k].getName());
+                                sb.append(mnemonicFields[k].getName().replace("$", ""));
                                 sb.append(",");
                                 break;
                             }
