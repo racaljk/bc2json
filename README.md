@@ -2,6 +2,7 @@
 
 ![](static/logo.png)
 [![codebeat badge](https://codebeat.co/badges/0d65b756-e695-4e21-8ae2-ff9c11450930)](https://codebeat.co/projects/github-com-racaljk-bc2json-master)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.racaljk/bc2json.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.racaljk%22%20AND%20a:%22bc2json%22)
 
 **bc2json** could convert `*.class bytecode` to `json` representation so that we can use it as **a human readable and also the world's most popular IR(ok, that's json)** for further use.
 Parsing behaviors are based on jvm8 specification. All elements on specification would be parsed into json.
@@ -12,7 +13,7 @@ Step 0: Recommend to introduce **bc2json** and its dependencies by maven
 <dependency>
   <groupId>com.github.racaljk</groupId>
   <artifactId>bc2json</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0/version>
 </dependency>
 ```
 Step 1: You can load bytecode from local file
@@ -36,7 +37,7 @@ You can set these options according to your demands
 + `Without any options` 
 ```javascript
 {"magic":-889275714,"minor_version":0,"major_version":52,"constants":{"slotsNum":"37","slots":[
-{"index":1,"type":"classfile.constantpool.ConstantMethodRefInfo","method_class":"java/lang/Object",
+{"index":1,"type":"parser.classfile.constantpool.ConstantMethodRefInfo","method_class":"java/lang/Object",
 "method_name":"\u003cinit\u003e","method_type":"()V"},...]},"access_flag":33,"this_class":"Test",
 "super_class":"java/lang/Object","interfaces":[],"fields":[{"field_name":"greeting","field_type":
 "Ljava/lang/String;","access_flag":"26"}],"methods":[{"method_name":"\u003cinit\u003e","method_type"
@@ -54,7 +55,7 @@ You can set these options according to your demands
     "slots": [
       {
         "index": 1,
-        "type": "classfile.constantpool.ConstantMethodRefInfo",
+        "type": "parser.classfile.constantpool.ConstantMethodRefInfo",
         "method_class": "java/lang/Object",
         "method_name": "\u003cinit\u003e",
         "method_type": "()V"
@@ -102,7 +103,7 @@ You can set these options according to your demands
     "slots": [
       {
         "index": 1,
-        "type": "classfile.constantpool.ConstantMethodRefInfo",
+        "type": "parser.classfile.constantpool.ConstantMethodRefInfo",
         "method_class": "java.lang.Object",
         "method": " \u003cinit\u003e()"
       },
