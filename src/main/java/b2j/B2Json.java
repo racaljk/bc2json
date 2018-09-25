@@ -22,8 +22,7 @@ public class B2Json {
     }
 
     /**
-     * Create a B2Json object for further use. This is the only way to create an instance of it since
-     * B2json constructor method was private;
+     * Create a B2Json object by given file path
      *
      * @param path bytecode class file path
      * @return A B2Json object
@@ -39,6 +38,16 @@ public class B2Json {
         }
 
         return b2Json;
+    }
+
+    /**
+     * Create a B2Json object by given java.io.File
+     *
+     * @param file bytecode class File object
+     * @return A B2Json object
+     */
+    public static B2Json fromFile(File file) {
+        return B2Json.fromFilePath(file.getPath());
     }
 
     private void registerSerializer() {
