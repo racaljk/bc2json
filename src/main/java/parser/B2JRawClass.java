@@ -1,7 +1,7 @@
 package parser;
 
-import classfile.adt.u2;
 import dataobject.*;
+import parser.classfile.adt.u2;
 
 public class B2JRawClass {
     @SuppressWarnings("unused")

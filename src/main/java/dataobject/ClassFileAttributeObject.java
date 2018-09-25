@@ -1,17 +1,17 @@
 package dataobject;
 
-import classfile.adt.u1;
-import classfile.adt.u2;
-import classfile.adt.u4;
-import classfile.attribute.Attribute;
-import classfile.attribute.CodeAttribute;
-import classfile.constantpool.AbstractConstantPool;
-import classfile.constantpool.ConstantUtf8Info;
-import classfile.exception.ClassLoadingException;
-import classfile.factory.AttributeFactory;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;
+import parser.classfile.adt.u1;
+import parser.classfile.adt.u2;
+import parser.classfile.adt.u4;
+import parser.classfile.attribute.Attribute;
+import parser.classfile.attribute.CodeAttribute;
+import parser.classfile.constantpool.AbstractConstantPool;
+import parser.classfile.constantpool.ConstantUtf8Info;
+import parser.classfile.exception.ClassLoadingException;
+import parser.classfile.factory.AttributeFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffa
 
             //We need to check if it's a \"ConstantUtf8Info\" instance"
             AbstractConstantPool cb = cp.at(attributeNameIndex.getValue());
-            //if it's not a classfile.constant utf-8 info structure then throws an classfile.exception
+            //if it's not a parser.classfile.constant utf-8 info structure then throws an parser.classfile.exception
             if (cb instanceof ConstantUtf8Info) {
                 Attribute attr = AttributeFactory.create(getReader(), cb.toString());
 
@@ -65,7 +65,7 @@ public class ClassFileAttributeObject extends BytesReaderProxy implements Stuffa
                     }
                 }
             } else {
-                throw new RuntimeException("class load classfile.exception");
+                throw new RuntimeException("class load parser.classfile.exception");
             }
         }
     }

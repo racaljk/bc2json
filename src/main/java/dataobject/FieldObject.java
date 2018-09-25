@@ -1,10 +1,10 @@
 package dataobject;
 
-import classfile.exception.ClassLoadingException;
-import classfile.field.FieldInfo;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;
+import parser.classfile.exception.ClassLoadingException;
+import parser.classfile.field.FieldInfo;
 
 import java.io.IOException;
 

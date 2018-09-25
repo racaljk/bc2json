@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Launcher {
     public static void main(String[] args) {
-        ArrayList<String> bytecodeFiles = getFiles("./src/test/java/java");
+        ArrayList<String> bytecodeFiles = getFiles(".\\src\\test\\java\\java");
         for (String bytecodeFile : bytecodeFiles) {
             System.out.println("=====" + bytecodeFile);
             B2Json b2Json = B2Json.fromFilePath(bytecodeFile);
@@ -31,5 +31,12 @@ public class Launcher {
             }
         }
         return files;
+    }
+
+    private static ArrayList<String> getFile(String path) {
+        ArrayList<String> file = new ArrayList<>();
+        File f = new File(path);
+        file.add(f.toString());
+        return file;
     }
 }

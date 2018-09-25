@@ -1,8 +1,8 @@
 package parser;
 
-import classfile.adt.u1;
-import classfile.adt.u2;
-import classfile.adt.u4;
+import parser.classfile.adt.u1;
+import parser.classfile.adt.u2;
+import parser.classfile.adt.u4;
 
 import java.io.*;
 

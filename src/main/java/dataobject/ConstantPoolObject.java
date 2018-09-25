@@ -1,14 +1,14 @@
 package dataobject;
 
-import classfile.adt.u1;
-import classfile.adt.u2;
-import classfile.constant.ConstantPoolTags;
-import classfile.constantpool.AbstractConstantPool;
-import classfile.exception.ClassLoadingException;
-import classfile.factory.ConstantPoolSFactory;
 import parser.BytesReaderProxy;
 import parser.ClassFileReader;
 import parser.Stuffable;
+import parser.classfile.adt.u1;
+import parser.classfile.adt.u2;
+import parser.classfile.constant.ConstantPoolTags;
+import parser.classfile.constantpool.AbstractConstantPool;
+import parser.classfile.exception.ClassLoadingException;
+import parser.classfile.factory.ConstantPoolSFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;

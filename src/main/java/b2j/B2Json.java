@@ -1,12 +1,12 @@
 package b2j;
 
-import classfile.exception.ClassLoadingException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dataobject.*;
 import parser.B2JClassLoader;
 import parser.B2JRawClass;
-import serialize.*;
+import parser.classfile.exception.ClassLoadingException;
+import serializer.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,17 +51,7 @@ public class B2Json {
     }
 
     /**
-     * Add additional options to control the behaviors of json creation. Its supports the following options:
-     *
-     * <ol>
-     * <li>OptionConst.PRETTY_PRINTING More pretty printing, it's especially useful when you works on developing phase</li>
-     * <li>OptionConst.MORE_READABLE Make json string more readable. It's also recommend to set it.</li>
-     * <li>OptionConst.IGNORE_CLASS_FILE_ATTRIBUTES Ignore the attributes of class file</li>
-     * <li>OptionConst.IGNORE_METHODS Ignore methods</li>
-     * <li>OptionConst.IGNORE_FIELDS Ignore fields</li>
-     * <li>OptionConst.IGNORE_INTERFACES Ignore interfaces</li>
-     * <li>OptionConst.IGNORE_CONSTANT_POOL Ignore constant pool slots</li>
-     * </ol>
+     * Add additional options to control the behaviors of json creation.
      *
      * @param opt option
      * @return A B2Json object

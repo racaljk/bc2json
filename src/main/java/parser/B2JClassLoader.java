@@ -1,9 +1,9 @@
 package parser;
 
-import classfile.adt.u2;
-import classfile.adt.u4;
-import classfile.exception.ClassLoadingException;
 import dataobject.*;
+import parser.classfile.adt.u2;
+import parser.classfile.adt.u4;
+import parser.classfile.exception.ClassLoadingException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
