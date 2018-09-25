@@ -11,7 +11,7 @@
 
 <groupId>com.github.racaljk</groupId>
 <artifactId>bc2json</artifactId>
-<version>1.0</version>
+    <version>1.0.1</version>
 <packaging>jar</packaging>
 <name>bc2json</name>
 <description>Convert java bytecode to json representation</description>
@@ -48,7 +48,7 @@
 <distributionManagement>
     <repository>
         <id>bc2json</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
     <snapshotRepository>
         <id>bc2json</id>

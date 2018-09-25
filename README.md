@@ -6,7 +6,15 @@
 **bc2json** could convert `*.class bytecode` to `json` representation so that we can use it as **a human readable and also the world's most popular IR(ok, that's json)** for further use.
 Parsing behaviors are based on jvm8 specification. All elements on specification would be parsed into json.
 
-# Start
+# Quick start
+Step 0: Recommend to introduce **bc2json** and its dependencies by maven
+```xml
+<dependency>
+  <groupId>com.github.racaljk</groupId>
+  <artifactId>bc2json</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
 Step 1: You can load bytecode from local file
 ```java
 B2Json b2Json = B2Json.fromFilePath("/path/to/Test.class");
@@ -23,7 +31,7 @@ System.out.println(result);
 // Or persist the result string to disk
 b2Json.toJsonFile("test.json");
 ```
-# Demonstrations of these options
+# Demonstrations of options
 You can set these options according to your demands
 + `Without any options` 
 ```javascript
@@ -127,21 +135,8 @@ You can set these options according to your demands
 }
 ```
 
-# Full APIs list
-+ `public static B2Json fromFilePath(String path)`
-Create B2Json object for further use. Note that we can not create from constructor since it's private method
-
-+ `public B2Json withOption(OptionConst opt)`
-Set some options according to demands
-    + `OptionConst.PRETTY_PRINTING`  More pretty printing, it's especially useful when you works on developing phase
-    + `OptionConst.MORE_READABLE` Make json string more readable. It's also recommend to set it. 
-    + `OptionConst.IGNORE_CLASS_FILE_ATTRIBUTES` Ignore the attributes of class file
-    + `OptionConst.IGNORE_METHODS` Ignore methods     
-    + `OptionConst.IGNORE_FIELDS` Ignore fields
-    + `OptionConst.IGNORE_INTERFACES` Ignore interfaces
-    + `OptionConst.IGNORE_CONSTANT_POOL` Ignore constant pool slots
-+ `public String toJsonString()` Output json as string
-+ `public void toJsonFile(String fileName)` Persist json on disk by given file name
+# Documentation
+See its `javadoc` for full details.
 
 # License
 Yes, I love the [MIT LICENSE](LICENSE)
