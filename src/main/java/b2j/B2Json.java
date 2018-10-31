@@ -8,10 +8,7 @@ import parser.B2JRawClass;
 import parser.classfile.exception.ClassLoadingException;
 import serializer.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class B2Json {
     private static GsonBuilder builder = new GsonBuilder();
@@ -34,6 +31,25 @@ public class B2Json {
             b2Json = new B2Json();
             b2Json.raw = new B2JClassLoader(path).parseClass();
         } catch (ClassLoadingException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return b2Json;
+    }
+
+    /**
+     * Create a B2Json object by given input stream
+     *
+     * @param stream input stream
+     * @return A B2Json object
+     */
+    public static B2Json fromInputStream(InputStream stream){
+        B2Json b2Json = null;
+
+        try {
+            b2Json = new B2Json();
+            b2Json.raw = new B2JClassLoader(stream).parseClass();
+        } catch (ClassLoadingException e) {
             e.printStackTrace();
         }
 

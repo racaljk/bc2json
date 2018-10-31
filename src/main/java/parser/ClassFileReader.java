@@ -10,6 +10,10 @@ import java.io.*;
 public class ClassFileReader {
     private DataInputStream in;
 
+    public ClassFileReader(InputStream stream){
+        in = new DataInputStream(stream);
+    }
+
     public ClassFileReader(String javaClassPath) throws FileNotFoundException {
         File f = new File(javaClassPath);
         if (f.exists()) {

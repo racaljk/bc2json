@@ -7,10 +7,15 @@ import parser.classfile.exception.ClassLoadingException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 public class B2JClassLoader {
     private ClassFileReader reader;
+
+    public B2JClassLoader(InputStream stream){
+        reader = new ClassFileReader(stream);
+    }
 
     public B2JClassLoader(String javaClassPath) throws FileNotFoundException {
         reader = new ClassFileReader(javaClassPath);
