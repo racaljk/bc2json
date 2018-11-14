@@ -137,8 +137,8 @@ public class ConstantPoolObjectSerializer implements JsonSerializer<ConstantPool
                 String type = cp.at(typeIndex).toString();
 
                 jsonSlot.addProperty("bootstrap_method_index", bootstrapMethodAttributeIndex);
-                jsonSlot.addProperty("name", name);
-                jsonSlot.addProperty("type", type);
+                jsonSlot.addProperty("bootstrap_name", name);
+                jsonSlot.addProperty("bootstrap_type", type);
             } else {
                 throw new RuntimeException("Unrecognized constant pool slot");
             }
