@@ -34,7 +34,19 @@ public class CoreMethodProperties {
         this.accessFlag = accessFlag;
     }
 
-    public String getCode() {
+    public int[] getCode() {
+        if(code==null){
+            return null;
+        }
+        String[] c = code.split(",");
+        int[] b = new int[c.length];
+        for(int i=0;i<c.length;i++){
+            b[i]=Integer.valueOf(c[i]);
+        }
+        return b;
+    }
+
+    public String getStringifiedCode(){
         return code;
     }
 

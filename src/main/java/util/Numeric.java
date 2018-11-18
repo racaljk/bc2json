@@ -1,6 +1,13 @@
 package util;
 
 public class Numeric {
+    public static int operandCompose(int ib1, int ib2){
+        return (ib1<<8)|ib2;
+    }
+
+    public static int operandCompose(int ib1, int ib2, int ib3, int ib4){
+        return (((ib1<<8)|(ib2&0xff))<<16)|(((ib3<<8)|(ib4&0xff))&0xffff);
+    }
     public static float resolveFloat(int bits) {
         int s = ((bits >> 31) == 0) ? 1 : -1;
         int e = ((bits >> 23) & 0xff);

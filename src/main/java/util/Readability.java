@@ -1,5 +1,9 @@
 package util;
 
+import parser.classfile.constant.Mnemonic;
+
+import java.lang.reflect.Field;
+
 public class Readability {
     public static String getFieldAccessFlagString(int acc) {
         StringBuilder sb = new StringBuilder();
@@ -220,5 +224,19 @@ public class Readability {
         sb.append(peelFieldDescriptor(descriptor.substring(descriptor.indexOf("("), descriptor.lastIndexOf(")"))));
         sb.append(")");
         return sb.toString();
+    }
+
+    public static String opcode2MnemonicStr(int opcode){
+        Field[] mnemonicFields = Mnemonic.class.getDeclaredFields();
+        for (Field mnemonicField : mnemonicFields) {
+            try {
+                if (mnemonicField.getInt(null) == (int) opcode) {
+                    return mnemonicField.getName().replace("$", "");
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return "invalid";
     }
 }

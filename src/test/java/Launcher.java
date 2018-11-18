@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Launcher {
     public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<String> bytecodeFileNames = getFiles(".\\src\\test\\java\\java");
+        ArrayList<String> bytecodeFileNames = getFile(".\\src\\test\\java\\java\\io\\DataInputStream.class");
         for (String bytecodeFileName : bytecodeFileNames) {
             System.out.println("=====" + bytecodeFileName);
             B2Json b2Json = B2Json.fromInputStream(new FileInputStream(new File(bytecodeFileName)));
@@ -18,6 +18,7 @@ public class Launcher {
         }
     }
 
+    @SuppressWarnings("unused")
     private static ArrayList<String> getFiles(String path) {
         ArrayList<String> files = new ArrayList<>();
         File file = new File(path);
@@ -35,6 +36,7 @@ public class Launcher {
         return files;
     }
 
+    @SuppressWarnings("unused")
     private static ArrayList<String> getFile(String path) {
         ArrayList<String> file = new ArrayList<>();
         File f = new File(path);
