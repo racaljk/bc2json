@@ -1,5 +1,6 @@
 package serializer;
 
+@SuppressWarnings("unused")
 public class CoreMethodProperties {
     private String methodName;
     private String methodDescriptor;
@@ -34,7 +35,7 @@ public class CoreMethodProperties {
         this.accessFlag = accessFlag;
     }
 
-    public int[] getCode() {
+    public int[] getIntArrayCode() {
         if(code==null){
             return null;
         }
