@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Launcher {
     public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<String> bytecodeFileNames = getFile(".\\src\\test\\java\\java\\io\\DataInputStream.class");
+        ArrayList<String> bytecodeFileNames = getFiles(".\\src\\test\\java\\java");
         for (String bytecodeFileName : bytecodeFileNames) {
             System.out.println("=====" + bytecodeFileName);
             B2Json b2Json = B2Json.fromInputStream(new FileInputStream(new File(bytecodeFileName)));

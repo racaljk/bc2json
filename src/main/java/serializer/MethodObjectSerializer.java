@@ -7,7 +7,6 @@ import parser.classfile.constant.Mnemonic;
 import util.Numeric;
 import util.Readability;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
 public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
@@ -42,7 +41,7 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
 
                         // read extra operand for specific opcodes
                         switch (opcode) {
-                            case Mnemonic.aaload: case Mnemonic.astore: case Mnemonic.bipush: case Mnemonic.dload: case Mnemonic.dstore:
+                            case Mnemonic.aload: case Mnemonic.astore: case Mnemonic.bipush: case Mnemonic.dload: case Mnemonic.dstore:
                             case Mnemonic.fload: case Mnemonic.fstore: case Mnemonic.iload: case Mnemonic.istore: case Mnemonic.ldc:
                             case Mnemonic.lload: case Mnemonic.lstore: case Mnemonic.newarray: case Mnemonic.ret:
                                 sb.append(" #").append(opcodes[++i]);
@@ -77,6 +76,9 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
                                             opcodes[i++], opcodes[i++]);
                                     sb.append("{").append(match).append(":").append(offset).append("}");
                                 }
+                                if(npair > 0){
+                                    i--;
+                                }
                                 break;
                             }
                             case Mnemonic.tableswitch: {
@@ -95,6 +97,9 @@ public class MethodObjectSerializer implements JsonSerializer<MethodObject> {
                                     int offset = Numeric.operandCompose(opcodes[i++], opcodes[i++],
                                             opcodes[i++], opcodes[i++]);
                                     sb.append("{").append(p).append(":").append(offset).append("}");
+                                }
+                                if (high - low +1 > 0) {
+                                   i--;
                                 }
                                 break;
                             }
