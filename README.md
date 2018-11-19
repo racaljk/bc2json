@@ -13,7 +13,7 @@ Step 0: Recommend to introduce **bc2json** and its dependencies by maven
 <dependency>
   <groupId>com.github.racaljk</groupId>
   <artifactId>bc2json</artifactId>
-  <version>1.3.0/version>
+  <version>1.4.1/version>
 </dependency>
 ```
 Step 1: You can load bytecode from local file
